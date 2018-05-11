@@ -29,13 +29,37 @@ module RuboCopDoc
       end
     end
 
+    module DescriptionJSON
+      def self.generate_json_file(hash)
+        File.write("./docs/description/description.json.json", JSON.pretty_generate(hash))
+      end
+
+      def self.run(file_path = "rubocop-doc.yml")
+        cops_data = YAML.load_file(file_path)
+        descriptions = cops_data.map do |cop_data|
+          {
+            patternId: cop_data[:name].gsub("/", "_"),
+            title: cop_data[:description],
+            description: cop_data[:description],
+            timeToFix: 5
+          }
+        end
+        generate_json_file(descriptions)
+      end
+
+    end
+
     module PattersJSON
       def self.generate_json_file(hash)
         File.write("./docs/patters.json", JSON.pretty_generate(hash))
       end
 
       def self.level(cop_data)
-        "Warning"
+        if ["Metrics", "Lint", "Performance", "Rails"].include?(cop_data[:department_name])
+          "Warning"
+        else
+          "Info"
+        end
       end
 
       def self.category(cop_data)
@@ -64,3 +88,4 @@ module RuboCopDoc
 end
 RuboCopDoc::Codacy::Markdown.run
 RuboCopDoc::Codacy::PattersJSON.run
+RuboCopDoc::Codacy::DescriptionJSON.run
