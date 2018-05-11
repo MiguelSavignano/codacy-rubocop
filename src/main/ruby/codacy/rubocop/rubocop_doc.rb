@@ -31,7 +31,7 @@ module RubocopDoc
 
     module DescriptionJSON
       def self.generate_json_file(hash)
-        File.write("src/main/resources/docs/description/description.json.json", JSON.pretty_generate(hash))
+        File.write("src/main/resources/docs/description/description.json", JSON.pretty_generate(hash))
       end
 
       def self.run(file_path = "rubocop-doc.yml")
@@ -51,7 +51,7 @@ module RubocopDoc
 
     module PattersJSON
       def self.generate_json_file(hash)
-        File.write("src/main/resources/docs/patters.json", JSON.pretty_generate(hash))
+        File.write("src/main/resources/docs/patterns.json", JSON.pretty_generate(hash))
       end
 
       def self.level(cop_data)
