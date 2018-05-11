@@ -3,11 +3,11 @@
 require 'yaml'
 require 'json'
 
-module RuboCopDoc
+module RubocopDoc
   module Codacy
     module Markdown
       def self.generate_markdown_file(file_name, content)
-        File.write("./docs/description/#{file_name}.md", content)
+        File.write("src/main/resources/docs/description/#{file_name}.md", content)
       end
 
       def self.file_name(cop_data)
@@ -31,7 +31,7 @@ module RuboCopDoc
 
     module DescriptionJSON
       def self.generate_json_file(hash)
-        File.write("./docs/description/description.json.json", JSON.pretty_generate(hash))
+        File.write("src/main/resources/docs/description/description.json.json", JSON.pretty_generate(hash))
       end
 
       def self.run(file_path = "rubocop-doc.yml")
@@ -51,7 +51,7 @@ module RuboCopDoc
 
     module PattersJSON
       def self.generate_json_file(hash)
-        File.write("./docs/patters.json", JSON.pretty_generate(hash))
+        File.write("src/main/resources/docs/patters.json", JSON.pretty_generate(hash))
       end
 
       def self.level(cop_data)
@@ -86,6 +86,6 @@ module RuboCopDoc
     end
   end
 end
-RuboCopDoc::Codacy::Markdown.run
-RuboCopDoc::Codacy::PattersJSON.run
-RuboCopDoc::Codacy::DescriptionJSON.run
+RubocopDoc::Codacy::Markdown.run
+RubocopDoc::Codacy::PattersJSON.run
+RubocopDoc::Codacy::DescriptionJSON.run
