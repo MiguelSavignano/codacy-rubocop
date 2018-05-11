@@ -15,7 +15,11 @@ module RubocopDoc
       end
 
       def self.content(cop_data)
-        "\n#{cop_data[:description]}\n\n# Examples\n\n#{cop_data[:examples_description]}"
+        "\n#{cop_data[:description]}\n\n# Examples\n\n#{cop_data[:examples_description]}\n\n[Source](#{info_url(cop_data)})"
+      end
+
+      def self.info_url(cop_data)
+        "http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/#{cop_data[:name]}"
       end
 
       def self.run(file_path = "rubocop-doc.yml")
